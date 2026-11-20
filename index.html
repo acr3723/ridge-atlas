@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="按难度和距离寻找徒步路线，收藏下次出发的目的地。">
+  <title>Ridge Atlas · 山径图鉴</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body id="top">
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="#top">Ridge Atlas <span>山径图鉴</span></a>
+      <button class="saved-toggle" type="button" aria-pressed="false">我的收藏 <span id="saved-count">0</span></button>
+    </div>
+  </header>
+  <main class="shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <h1 id="hero-title">沿着山径，<br>走进风景。</h1>
+        <p>从半日林间漫步，到一整天的高山穿越。</p>
+        <a href="#routes" class="hero-link">探索路线</a>
+      </div>
+    </section>
+
+    <section class="routes" id="routes" aria-labelledby="routes-title">
+      <div class="section-heading">
+        <h2 id="routes-title">发现路线</h2>
+        <p id="result-count" role="status"></p>
+      </div>
+      <form id="filters" class="filters" role="search">
+        <label>搜索路线 <input id="query" type="search" placeholder="路线名、地貌或地区"></label>
+        <label>难度
+          <select id="difficulty">
+            <option value="">全部难度</option><option>轻松</option><option>适中</option><option>挑战</option>
+          </select>
+        </label>
+        <label>距离
+          <select id="distance">
+            <option value="">不限</option><option value="8">8 公里以内</option><option value="12">12 公里以内</option>
+          </select>
+        </label>
+        <button type="reset" class="clear">重置筛选</button>
+      </form>
+      <div id="route-list" class="route-list"></div>
+    </section>
+  </main>
+  <footer class="shell footer">Ridge Atlas · 路线和参数为项目示例</footer>
+
+  <template id="route-template">
+    <article class="route">
+      <div class="route-top">
+        <span class="terrain"></span>
+        <button type="button" class="favorite" aria-pressed="false"></button>
+      </div>
+      <div class="route-body">
+        <p class="region"></p>
+        <h3></h3>
+        <p class="summary"></p>
+        <dl class="stats">
+          <div><dt>距离</dt><dd class="length"></dd></div>
+          <div><dt>爬升</dt><dd class="gain"></dd></div>
+          <div><dt>难度</dt><dd class="level"></dd></div>
+        </dl>
+        <button type="button" class="details">查看路线</button>
+      </div>
+    </article>
+  </template>
+
+  <dialog id="route-dialog" aria-labelledby="dialog-title">
+    <form method="dialog"><button class="close" type="submit" aria-label="关闭">×</button></form>
+    <p class="region" id="dialog-region"></p>
+    <h2 id="dialog-title"></h2>
+    <p id="dialog-meta"></p>
+    <p id="dialog-description"></p>
+  </dialog>
+</body>
+</html>
